@@ -20,7 +20,6 @@ import org.apache.poi.ss.usermodel.VerticalAlignment;
 import com.xzx.dbs.spider.bean.DoubanBook;
 import com.xzx.dbs.spider.container.AllBookVector;
 import com.xzx.dbs.spider.container.BookVector;
-import com.xzx.dbs.spider.start.StartSpider;
 
 /**
  * @author xiezi
