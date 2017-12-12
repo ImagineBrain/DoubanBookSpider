@@ -1,7 +1,8 @@
 package com.xzx.dbs.spider.thread;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
+
+import org.apache.log4j.Logger;
 
 import com.xzx.dbs.spider.bean.DoubanBook;
 import com.xzx.dbs.spider.bean.FetchedPage;
@@ -18,7 +19,10 @@ import com.xzx.dbs.spider.util.PageFetcher;
  * 爬虫线程
  */
 public class SpiderWorker implements Runnable {
-	private static final Logger Log = Logger.getLogger(SpiderWorker.class.getName());
+	/**
+	 * log
+	 */
+	private static final Logger log = Logger.getLogger(SpiderWorker.class.getName());
 	private PageFetcher fetcher;
 	private ContentHandler handler;
 	private ContentParser parser;
@@ -44,7 +48,7 @@ public class SpiderWorker implements Runnable {
 				UrlTable.put(url, url);
 				// 抓取URL指定的页面，并返回状态码和页面内容构成的FetchedPage对象
 				FetchedPage fetchedPage = fetcher.getContentFromUrl(url);
-				// System.out.println(fetchedPage.getContent());
+				// log.info(fetchedPage.getContent());
 				// 检查爬取页面的合法性，爬虫是否被禁止
 				if (!handler.check(fetchedPage)) {
 					continue;
@@ -67,6 +71,6 @@ public class SpiderWorker implements Runnable {
 			}
 		}
 		fetcher.close();
-		Log.info("Spider-" + threadIndex + ": stop...");
+		log.info("Spider-" + threadIndex + ": 运行结束");
 	}
 }

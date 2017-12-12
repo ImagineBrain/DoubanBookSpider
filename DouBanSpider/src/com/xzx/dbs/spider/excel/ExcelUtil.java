@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
@@ -19,12 +20,18 @@ import org.apache.poi.ss.usermodel.VerticalAlignment;
 import com.xzx.dbs.spider.bean.DoubanBook;
 import com.xzx.dbs.spider.container.AllBookVector;
 import com.xzx.dbs.spider.container.BookVector;
+import com.xzx.dbs.spider.start.StartSpider;
 
 /**
  * @author xiezi
  * excel工具类
  */
 public class ExcelUtil {
+
+	/**
+	 * log
+	 */
+	private static final Logger log = Logger.getLogger(ExcelUtil.class.getName());
 
 	/**
 	 * Excel标题
@@ -52,6 +59,7 @@ public class ExcelUtil {
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			log.error("生成excel失败", e);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,6 +70,7 @@ public class ExcelUtil {
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					log.error("生成excel失败", e);
 				}
 			}
 			if (out != null) {
@@ -70,6 +79,7 @@ public class ExcelUtil {
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					log.error("生成excel失败", e);
 				}
 			}
 		}

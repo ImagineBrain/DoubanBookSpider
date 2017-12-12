@@ -5,6 +5,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
+
 import com.xzx.dbs.spider.bean.DoubanBook;
 import com.xzx.dbs.spider.container.AllBookVector;
 import com.xzx.dbs.spider.container.BookVector;
@@ -19,7 +21,14 @@ import com.xzx.dbs.spider.util.UrlUtil;
  * 启动爬虫
  */
 public class StartSpider {
-
+	/**
+	 * log
+	 */
+	private static final Logger log = Logger.getLogger(StartSpider.class.getName());
+	/**
+	 * 运行main
+	 * @param args type threadNum dirPath
+	 */
 	public static void main(String[] args) {
 		String type = "编程";
 		// 初始化爬取队列
@@ -34,6 +43,7 @@ public class StartSpider {
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					log.error("爬虫线程启动失败", e);
 				}
 			}
 		}
@@ -41,26 +51,26 @@ public class StartSpider {
 		while (true) {
 			if (exe.isTerminated()) {
 				// 所有线程执行完毕
-				System.out.println("所有线程爬取结束！");
+				log.info("所有线程爬取结束！");
 				break;
 			}
 		}
-		System.out.println("所有书籍");
+		log.info("所有书籍");
 		for (DoubanBook b : AllBookVector.getBooks()) {
-			System.out.println(b.toString());
+			log.info(b.toString());
 		}
-		System.out.println("评价大于1000的前100本书籍");
+		log.info("评价大于1000的前100本书籍");
 		for (DoubanBook b : BookVector.getBooks()) {
-			System.out.println(b.toString());
+			log.info(b.toString());
 		}
-		System.out.println("已经爬取的URL");
+		log.info("已经爬取的URL");
 		Set<String> set = UrlTable.getUrlTable().keySet();
 		for (String key : set) {
-			System.out.println(UrlTable.getUrlTable().get(key));
+			log.info(UrlTable.getUrlTable().get(key));
 		}
 		// 生成excel
 		ExcelUtil.generateBookExcel("D:", type + ".xls");
-		System.out.println("生成Excel结束!");
+		log.info("生成Excel结束!");
 	}
 
 	/**

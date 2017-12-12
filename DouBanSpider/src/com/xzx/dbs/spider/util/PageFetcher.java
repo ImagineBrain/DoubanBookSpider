@@ -1,7 +1,5 @@
 package com.xzx.dbs.spider.util;
 
-import java.util.logging.Logger;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -10,11 +8,23 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
+import org.apache.log4j.Logger;
 
 import com.xzx.dbs.spider.bean.FetchedPage;
+import com.xzx.dbs.spider.start.StartSpider;
 
+/**
+ * @author xiezi
+ * 爬取网页工具
+ */
 public class PageFetcher {
-//	private static final Logger Log = Logger.getLogger(PageFetcher.class.getName());
+	/**
+	 * log
+	 */
+	private static final Logger log = Logger.getLogger(StartSpider.class.getName());
+	/**
+	 * http客户端
+	 */
 	private DefaultHttpClient client;
 
 	/**
@@ -48,7 +58,7 @@ public class PageFetcher {
 		// 创建Get请求，并设置Header
 		HttpGet getHttp = new HttpGet(url);
 		getHttp.setHeader("User-Agent",
-				"Mozilla/5.0 (Windows NT 6.1; rv:16.0) Gecko/20100101 Firefox/16.0");
+				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36");
 		HttpResponse response;
 
 		try {
@@ -63,10 +73,7 @@ public class PageFetcher {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-
-			// 因请求超时等问题产生的异常，将URL放回待抓取队列，重新爬取
-//			Log.info(">> Put back url: " + url);
-//			UrlQueue.addFirstElement(url);
+			log.error("爬取信息失败", e);
 		}
 
 		return new FetchedPage(url, content, statusCode);
