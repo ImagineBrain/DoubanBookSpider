@@ -20,9 +20,16 @@ import com.xzx.dbs.spider.bean.DoubanBook;
 import com.xzx.dbs.spider.container.AllBookVector;
 import com.xzx.dbs.spider.container.BookVector;
 
+/**
+ * @author xiezi
+ * excel工具类
+ */
 public class ExcelUtil {
 
-	private static final String[] titles = { "序号", "书名", "评分", "评价人数", "作者", "出版社", "出版日期", "价格" };
+	/**
+	 * Excel标题
+	 */
+	private static final String[] TITLES = { "序号", "书名", "评分", "评价人数", "作者", "出版社", "出版日期", "价格" };
 
 	/**
 	 * 生成书籍excel
@@ -86,8 +93,8 @@ public class ExcelUtil {
 		titleFont.setBold(true);
 		// 加载字体
 		titleStyle.setFont(titleFont);
-		for (int i = 0; i < titles.length; i++) {
-			String title = titles[i];
+		for (int i = 0; i < TITLES.length; i++) {
+			String title = TITLES[i];
 			HSSFCell cell = titleRow.createCell(i);
 			cell.setCellStyle(titleStyle);
 			cell.setCellValue(title);
@@ -96,7 +103,7 @@ public class ExcelUtil {
 		for (int i = 1; i <= books.size(); i++) {
 			HSSFRow row = sheet.createRow(i);
 			DoubanBook book = books.get(books.size() - i);
-			for (int j = 0; j < titles.length; j++) {
+			for (int j = 0; j < TITLES.length; j++) {
 				HSSFCell cell = row.createCell(j);
 				switch (j) {
 				case 0:

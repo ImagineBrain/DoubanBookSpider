@@ -2,6 +2,10 @@ package com.xzx.dbs.spider.util;
 
 import com.xzx.dbs.spider.bean.FetchedPage;
 
+/**
+ * @author xiezi
+ * 页面上下文判断
+ */
 public class ContentHandler {
 	public boolean check(FetchedPage fetchedPage) {
 		// 如果抓取的页面不能获取

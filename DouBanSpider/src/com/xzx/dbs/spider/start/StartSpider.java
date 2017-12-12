@@ -14,13 +14,16 @@ import com.xzx.dbs.spider.excel.ExcelUtil;
 import com.xzx.dbs.spider.thread.SpiderWorker;
 import com.xzx.dbs.spider.util.UrlUtil;
 
+/**
+ * @author xiezi
+ * 启动爬虫
+ */
 public class StartSpider {
 
 	public static void main(String[] args) {
 		String type = "编程";
 		// 初始化爬取队列
 		initializeQueue(type);
-
 		// 创建worker线程并启动
 		ExecutorService exe = Executors.newFixedThreadPool(50);
 		for (int i = 1; i <= 5; i++) {

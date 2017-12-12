@@ -13,6 +13,10 @@ import com.xzx.dbs.spider.util.ContentHandler;
 import com.xzx.dbs.spider.util.ContentParser;
 import com.xzx.dbs.spider.util.PageFetcher;
 
+/**
+ * @author xiezi
+ * 爬虫线程
+ */
 public class SpiderWorker implements Runnable {
 	private static final Logger Log = Logger.getLogger(SpiderWorker.class.getName());
 	private PageFetcher fetcher;
@@ -45,7 +49,6 @@ public class SpiderWorker implements Runnable {
 				if (!handler.check(fetchedPage)) {
 					continue;
 				}
-
 				// 解析页面，获取目标数据
 				ArrayList<DoubanBook> books = parser.parseBook(fetchedPage);
 				if (books != null && !books.isEmpty()) {
