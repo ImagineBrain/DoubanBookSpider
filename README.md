@@ -1,6 +1,6 @@
-mainå‡½æ•°
-StartSpider.main(String args[]);
-3ä¸ªè¾“å…¥å‚æ•°
-String type--ä¹¦ç±ç±»å‹
-int threadNum--çº¿ç¨‹æ•°
-String dirPath--excelæ–‡ä»¶å­˜æ”¾ç›®å½•
+mainº¯Êı;  
+StartSpider.main(String args[]);  
+3¸öÊäÈë²ÎÊı;  
+String type--Êé¼®ÀàĞÍ;  
+int threadNum--Ïß³ÌÊı;  
+String dirPath--excelÎÄ¼ş´æ·ÅÄ¿Â¼;  
