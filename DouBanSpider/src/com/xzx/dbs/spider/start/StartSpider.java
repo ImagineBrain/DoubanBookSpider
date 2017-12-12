@@ -26,20 +26,36 @@ public class StartSpider {
 	 */
 	private static final Logger log = Logger.getLogger(StartSpider.class.getName());
 	/**
+	 * 书籍类型
+	 */
+	private static String type;
+	/**
+	 * 文件存放路径
+	 */
+	private static String dirPath;
+	/**
+	 * 线程数
+	 */
+	private static int threadNum = 1;
+	/**
 	 * 运行main
 	 * @param args type threadNum dirPath
 	 */
 	public static void main(String[] args) {
-		String type = "编程";
+		if (args.length >=3) {
+			type = args[0];
+			threadNum = Integer.parseInt(args[1]);
+			dirPath = args[2];
+		}
 		// 初始化爬取队列
 		initializeQueue(type);
 		// 创建worker线程并启动
 		ExecutorService exe = Executors.newFixedThreadPool(50);
-		for (int i = 1; i <= 5; i++) {
+		for (int i = 1; i <= threadNum; i++) {
 			exe.execute(new SpiderWorker(i));
 			if (i == 1) {
 				try {
-					TimeUnit.SECONDS.sleep(4);
+					TimeUnit.SECONDS.sleep(4); //等待4s，方便第一个线程从首页获取到了其他页面链接
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -69,7 +85,7 @@ public class StartSpider {
 			log.info(UrlTable.getUrlTable().get(key));
 		}
 		// 生成excel
-		ExcelUtil.generateBookExcel("D:", type + ".xls");
+		ExcelUtil.generateBookExcel(dirPath, type + ".xls");
 		log.info("生成Excel结束!");
 	}
 
