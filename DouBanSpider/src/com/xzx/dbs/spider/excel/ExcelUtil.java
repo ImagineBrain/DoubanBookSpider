@@ -53,6 +53,10 @@ public class ExcelUtil {
 		// 写文件
 		OutputStream out = null;
 		try {
+			File dirPath = new File(fileDir);
+			if (!dirPath.exists()) {
+				dirPath.mkdirs();
+			}
 			out = new FileOutputStream(new File(fileDir + "/" + fileName));
 			workbook.write(out);
 		} catch (FileNotFoundException e) {
